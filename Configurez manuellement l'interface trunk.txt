@@ -1,0 +1,19 @@
+Configurez manuellement l'interface trunk F0/1.
+Ouvrez la fenêtre de configuration.
+
+a. Modifiez le mode de port de commutateur (switchport) sur l'interface F0/1 de manière à imposer le trunking. Veillez à effectuer cette opération sur les deux commutateurs.
+S1(config)# interface f0/1
+S1(config-if)# switchport mode trunk
+S2(config)# interface f0/1
+S2(config-if)# switchport mode trunk
+
+b. Dans le cadre de la configuration du trunk, définissez le VLAN natif à 8 sur les deux commutateurs. Vous pouvez voir des messages d'erreur temporairement pendant que les deux interfaces sont configurées pour différents VLAN natifs.
+S1(config-if)# switchport trunk native vlan 8
+S2(config-if)# switchport trunk native vlan 8
+
+c. Comme autre partie de la configuration du trunk, spécifiez que les VLAN 3, 4 et 8 sont uniquement autorisés à traverser le trunk.
+S1(config-if)# switchport trunk allowed vlan 3,4,8
+S2(config-if)# switchport trunk allowed vlan 3,4,8
+
+d. Exécutez la commande show interfaces trunk pour vérifier les ports de trunk, le VLAN natif et les VLAN autorisés sur le trunk.
+S1# show interfaces trunk

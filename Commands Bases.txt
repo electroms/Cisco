@@ -1,0 +1,109 @@
+no ip domain-lookup 
+service password-encryption 
+enable secret class 
+banner motd #Unauthorized access is strictly prohibited. (Accès sans autorisation strictement interdit.) # 
+line con 0 
+password cisco 
+login 
+logging synchronous 
+line vty 0 15 
+password cisco 
+logging synchronous 
+login
+
+
+Configurez les paramètres de base du routeur.
+Ouvrez la fenêtre de configuration.
+
+a. Accédez au routeur par la console et activez le mode d'exécution privilégié.
+router> enable
+
+b. Passez en mode de configuration.
+router# config terminal
+
+c. Attribuez un nom de l'appareil au routeur.
+router(config)# hostname R1
+
+d. Désactivez la recherche DNS pour empêcher le routeur d'essayer de traduire les commandes saisies comme s'il s'agissait de noms d'hôtes.
+R1(config)# no ip domain-lookup
+
+e. Attribuez class comme mot de passe chiffré d'exécution privilégié.
+R1(config)# enable secret class
+
+f. Attribuez cisco comme mot de passe de console et activez la connexion.
+R1(config)# line console 0
+R1(config-line)# password cisco
+R1(config-line)# login
+
+g. Attribuez cisco comme mot de passe VTY et activez la connexion.
+R1(config)# line vty 0 4
+R1(config-line)# password cisco
+R1(config-line)# login
+
+h. Cryptez les mots de passe en texte clair.
+R1(config)# service password-encryption
+
+i. Créez une bannière qui avertit quiconque accède au périphérique que tout accès non autorisé est interdit.
+R1(config)# banner motd $ Authorized Users Only! $
+
+j. Enregistrez la configuration en cours dans le fichier de configuration initiale.
+R1(config)# exit
+R1# copy running-config startup-config
+
+--------------------------------------------------------------------------------------------------------------------
+
+Configurez les paramètres de base pour chaque commutateur.
+Ouvrez la fenêtre de configuration.
+
+a. Accédez au commutateur par la console et activez le mode d'exécution privilégié.
+Switch> enable
+
+b. Passez en mode de configuration.
+switch# config terminal
+
+c. Attribuez un nom de périphérique au commutateur.
+switch(config)# hostname S1
+switch(config)# hostname S2
+
+d. Désactivez la recherche DNS pour empêcher le routeur d'essayer de traduire les commandes saisies comme s'il s'agissait de noms d'hôtes.
+S1(config)# no ip domain-lookup
+S2(config)# no ip domain-lookup
+
+e. Attribuez class comme mot de passe chiffré d'exécution privilégié.
+S1(config)# enable secret class
+S2(config)# enable secret class
+
+f. Attribuez cisco comme mot de passe de console et activez la connexion.
+S1(config)# line console 0
+S1(config-line)# password cisco
+S1(config-line)# login
+S2(config)# line console 0
+S2(config-line)# password cisco
+S2(config-line)# login
+
+g. Attribuez cisco comme mot de passe vty et activez la connexion.
+S1(config)# line vty 0 15
+S1(config-line)# password cisco
+S1(config-line)# login
+S2(config)# line vty 0 15
+S2(config-line)# password cisco
+S2(config-line)# login
+
+h. Cryptez les mots de passe en texte clair.
+S1(config)# service password-encryption
+S2(config)# service password-encryption
+
+i. Créez une bannière qui avertit quiconque accède à l'appareil que tout accès non autorisé est interdit.
+Travaux pratiques - Configuration du routage inter-VLAN avec la méthode router-on-a-stick
+Tous droits réservés. BY MR Anis Hmidach Instructor Cisco Cyberops
+S1(config)# banner motd $ Authorized Users Only! $
+S2(config)# banner motd $ Authorized Users Only! $
+
+j. Réglez l'horloge sur le commutateur.
+S1# clock set 15:30:00 19 September 2019
+S2# clock set 15:30:00 19 September 2019
+Remarque: utilisez le point d'interrogation (?) pour obtenir et connaître la séquence de paramètres requise pour exécuter cette commande.
+
+k. Copiez la configuration en cours en tant que configuration de démarrage.
+S1# copy running-config startup-config
+S2# copy running-config startup-config

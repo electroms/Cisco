@@ -1,0 +1,45 @@
+Créez les VLAN sur les commutateurs.
+Ouvrez la fenêtre de configuration.
+
+a. Créez et nommez les VLAN requis sur chaque commutateur à partir du tableau ci-dessus.
+S1 (configuration) # vlan 3
+S1(config-vlan)# name Management
+S1 (config-vlan) # vlan 4
+S1 (config-vlan) # name Operations
+S1 (config-vlan) # vlan 7
+S1(config-vlan)# name ParkingLot
+S1 (config-vlan) # vlan 8
+S1(config-vlan)# name Native
+S2 (configuration) # vlan 3
+S2(config-vlan)# name Management
+S2 (config-vlan) # vlan 4
+S2 (config-vlan) # name Operations
+S2 (config-vlan) # vlan 7
+S2(config-vlan)# name ParkingLot
+S1(config-vlan)# vlan 8
+S1(config-vlan)# name Native
+
+b. Configurez et activez l'interface de gestion et la passerelle par defaut sur chaque commutateur en utilisant les informations relatives à l'adresse IP dans le tableau d'adressage.
+Travaux pratiques - Configuration du routage inter-VLAN avec la méthode router-on-a-stick
+Tous droits réservés. BY MR Anis Hmidach Instructor Cisco Cyberops
+S1 (config) # interface vlan 3
+S1(config-if)# ip address 192.168.3.11 255.255.255.0
+S1(config-if)# no shutdown
+S1(config-if)# exit
+S1(config)# ip default-gateway 192.168.3.1
+S2 (config) # interface vlan 3
+S2(config-if)# ip address 192.168.3.12 255.255.255.0
+S2(config-if)# no shutdown
+S2(config-if)# exit
+S2(config)# ip default-gateway 192.168.3.1
+
+c. Attribuez tous les ports inutilisés des deux commutateurs au VLAN ParkingLot, configurez-les pour le mode d'accès statique et désactivez-les administrativement.
+Remarque: La commande Interface range est utile pour accomplir cette tâche avec autant de commandes que nécessaire.
+S1(config)# interface range f0/2 - 4 , f0/7 - 24 , g0/1 - 2
+S1(config-if-range)# switchport mode access
+S1 (config-if-range) # accès switchport vlan 7
+S1(config-if-range)# shutdown
+S2(config)# interface range f0/2 - 17, f0/19 - 24 , g0/1 - 2
+S2(config-if-range)# switchport mode access
+S2 (config-if-range) # accès switchport vlan 7
+S2(config-if-range)# shutdown

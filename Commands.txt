@@ -1,0 +1,28 @@
+Tous droits réservés. BY MR Anis Hmidach Instructor Cisco Cyberops Page 3 sur 15
+ 
+enable secret class
+
+
+enable password-encryption
+
+ 
+
+banner motd #Unauthorized access is strictly prohibited. (Accès sans autorisation strictement interdit.) # 
+
+line con 0 
+password cisco 
+login 
+logging synchronous 
+
+
+line vty 0 4 
+password 
+cisco 
+login 
+interface g0/0/1 
+ip address 172.16.99.1 255.255.255.0 
+no shutdown 
+
+
+
+end
