@@ -55,3 +55,8 @@ Vous allez :
 
 > Cisco - Travaux Pratiques CCNA  
 > Documentation et adaptation pour travaux pratiques sur matériel réel.
+>
+> ![image](https://github.com/user-attachments/assets/bcd5a920-7295-48c8-9f22-22c659c01f9d)
+> ![image](https://github.com/user-attachments/assets/c916ef2b-17aa-4125-a95d-411178fdf266)
+
+
